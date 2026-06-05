@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dachdeckermeister Oehme – Ihr Dach. Unser Handwerk.</title>
+  <meta name="description" content="Dachdeckermeister Frank Oehme GmbH – Ihr zuverlässiger Dachdeckerbetrieb in Groß-Gerau seit 1995. Steildach, Flachdach, Fassade, Dachfenster und mehr.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg:      '#0F1117',
+            surface: '#1A1D27',
+            accent:  '#E85D04',
+            accent2: '#FB923C',
+            ink:     '#F8F9FA',
+            muted:   '#6B7280',
+            border:  '#2D3148',
+          },
+          fontFamily: {
+            display: ['Barlow Condensed', 'Impact', 'sans-serif'],
+            sans:    ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #0F1117; color: #F8F9FA; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+    .reveal-d4 { transition-delay: 0.32s; }
+    .reveal-d5 { transition-delay: 0.40s; }
+    .reveal-d6 { transition-delay: 0.48s; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* Navbar */
+    .nav-pill {
+      background: rgba(15,17,23,0.06);
+      backdrop-filter: blur(64px) saturate(200%);
+      -webkit-backdrop-filter: blur(64px) saturate(200%);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1.5px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(0,0,0,0.4);
+      border-radius: 9999px;
+      transition: padding 0.3s ease, background 0.3s ease;
+    }
+
+    /* Orange CTA button */
+    .btn-orange {
+      background: linear-gradient(170deg, #FF7A30 0%, #E85D04 55%, #C94D00 100%);
+      color: #fff;
+      border-radius: 9999px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.875rem;
+      letter-spacing: 0.01em;
+      box-shadow: 0 2px 20px rgba(232,93,4,0.45), inset 0 1.5px 0 rgba(255,255,255,0.2), inset 0 -1.5px 0 rgba(0,0,0,0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-block;
+    }
+    .btn-orange:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 6px 28px rgba(232,93,4,0.55), inset 0 1.5px 0 rgba(255,255,255,0.2), inset 0 -1.5px 0 rgba(0,0,0,0.1);
+    }
+
+    /* Ghost button */
+    .btn-ghost {
+      background: transparent;
+      color: #F8F9FA;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 9999px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+      display: inline-block;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(232,93,4,0.6);
+      background: rgba(232,93,4,0.08);
+      transform: translateY(-1.5px);
+    }
+
+    /* Marquee */
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+
+    /* Service cards */
+    .service-card {
+      background: #1A1D27;
+      border: 1px solid #2D3148;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(232,93,4,0.4);
+      box-shadow: 0 16px 48px rgba(232,93,4,0.12);
+    }
+    .service-icon {
+      width: 48px; height: 48px;
+      background: rgba(232,93,4,0.12);
+      border: 1px solid rgba(232,93,4,0.2);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s ease;
+    }
+    .service-card:hover .service-icon {
+      background: rgba(232,93,4,0.22);
+    }
+
+    /* Stats */
+    .stat-card {
+      background: #1A1D27;
+      border: 1px solid #2D3148;
+      border-radius: 16px;
+      text-align: center;
+      transition: border-color 0.3s ease;
+    }
+    .stat-card:hover { border-color: rgba(232,93,4,0.4); }
+
+    /* Process step */
+    .process-step {
+      position: relative;
+    }
+    .step-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 5rem;
+      font-weight: 800;
+      line-height: 1;
+      color: rgba(232,93,4,0.1);
+      position: absolute;
+      top: -1rem;
+      left: -0.5rem;
+      user-select: none;
+    }
+
+    /* Project grid */
+    .project-card {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+    .project-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      filter: grayscale(10%);
+    }
+    .project-card:hover img { transform: scale(1.05); filter: grayscale(0%); }
+    .project-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(15,17,23,0.85) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .project-card:hover .project-overlay { opacity: 1; }
+
+    /* Form fields */
+    .field {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #2D3148;
+      color: #F8F9FA;
+      padding: 0.75rem 0;
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.25s ease;
+    }
+    .field:focus { border-bottom-color: #E85D04; }
+    .field::placeholder { color: #6B7280; }
+    textarea.field { resize: vertical; min-height: 100px; }
+
+    /* Mobile menu */
+    #mobile-menu {
+      position: fixed; inset: 0; z-index: 49;
+      background: rgba(15,17,23,0.97);
+      backdrop-filter: blur(24px);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    #mobile-menu.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* Trust bar logos */
+    .trust-logo {
+      opacity: 0.4;
+      filter: grayscale(100%) brightness(2);
+      transition: opacity 0.3s ease, filter 0.3s ease;
+    }
+    .trust-logo:hover { opacity: 0.8; filter: grayscale(0%) brightness(1); }
+
+    /* Accent underline */
+    .accent-line {
+      display: inline-block;
+      height: 3px;
+      width: 48px;
+      background: linear-gradient(90deg, #E85D04, #FB923C);
+      border-radius: 2px;
+    }
+
+    /* Notfall badge */
+    .notfall-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(232,93,4,0.12);
+      border: 1px solid rgba(232,93,4,0.3);
+      border-radius: 9999px;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #FB923C;
+    }
+
+    /* Scroll indicator */
+    .scroll-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #E85D04;
+      animation: blink 2s ease infinite;
+    }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     MOBILE MENU
+════════════════════════════════════════════ -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="flex flex-col h-full px-6 py-8">
+    <div class="flex justify-between items-center mb-12">
+      <a href="/" class="font-display font-bold text-2xl tracking-wide text-ink">
+        <span class="text-accent">OEHME</span>
+      </a>
+      <button id="close-menu" class="text-ink p-2" aria-label="Menü schließen">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="flex flex-col gap-6">
+      <a href="#leistungen" class="mobile-link text-4xl font-display font-bold tracking-wide text-ink hover:text-accent transition-colors">Leistungen</a>
+      <a href="#ueber-uns"  class="mobile-link text-4xl font-display font-bold tracking-wide text-ink hover:text-accent transition-colors">Über uns</a>
+      <a href="#projekte"   class="mobile-link text-4xl font-display font-bold tracking-wide text-ink hover:text-accent transition-colors">Projekte</a>
+      <a href="#kontakt"    class="mobile-link text-4xl font-display font-bold tracking-wide text-ink hover:text-accent transition-colors">Kontakt</a>
+    </nav>
+    <div class="mt-auto">
+      <a href="#kontakt" class="btn-orange px-6 py-3.5 text-base mobile-link block text-center">Angebot anfragen</a>
+      <a href="tel:+496152399050" class="mt-4 flex items-center gap-3 text-muted hover:text-ink transition-colors">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6.07 6.07l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +49 6152 39905
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════ -->
+<header class="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-5">
+  <nav id="nav-pill" class="nav-pill flex items-center gap-8 px-7 py-4 w-full max-w-5xl" style="padding: 1.1rem 1.75rem;">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2 mr-auto flex-shrink-0">
+      <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 18L11 3L21 18" stroke="#E85D04" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="6" y="12" width="10" height="7" rx="1" fill="#E85D04"/>
+        <rect x="9" y="14" width="4" height="5" rx="0.5" fill="#0F1117"/>
+      </svg>
+      <span class="font-display font-bold text-xl tracking-widest text-ink">OEHME</span>
+    </a>
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-7 text-sm font-medium text-muted">
+      <a href="#leistungen" class="hover:text-ink transition-colors duration-200">Leistungen</a>
+      <a href="#ueber-uns"  class="hover:text-ink transition-colors duration-200">Über uns</a>
+      <a href="#projekte"   class="hover:text-ink transition-colors duration-200">Projekte</a>
+      <a href="#kontakt"    class="hover:text-ink transition-colors duration-200">Kontakt</a>
+    </div>
+    <a href="#kontakt" class="btn-orange px-5 py-2.5 hidden md:inline-block ml-4 text-sm">Angebot anfragen</a>
+    <!-- Mobile hamburger -->
+    <button id="open-menu" class="md:hidden ml-auto text-ink p-1" aria-label="Menü öffnen">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="19" y2="6"/><line x1="3" y1="12" x2="19" y2="12"/><line x1="3" y1="18" x2="19" y2="18"/>
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section class="relative min-h-screen flex flex-col justify-end overflow-hidden">
+  <!-- Background image -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&q=80"
+      alt="Dachdecker bei der Arbeit"
+      class="w-full h-full object-cover"
+      loading="eager"
+    >
+    <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(15,17,23,0.35) 0%, rgba(15,17,23,0.15) 40%, rgba(15,17,23,0.92) 85%, #0F1117 100%);"></div>
+  </div>
+
+  <!-- 30 Jahre badge -->
+  <div class="absolute top-28 right-6 md:right-16 z-10 hidden sm:block">
+    <div class="text-center bg-accent rounded-2xl px-5 py-4 shadow-2xl" style="box-shadow: 0 8px 32px rgba(232,93,4,0.5);">
+      <div class="font-display font-bold text-5xl text-white leading-none">30</div>
+      <div class="text-white/80 text-xs font-medium mt-1 tracking-wider uppercase">Jahre<br>Erfahrung</div>
+    </div>
+  </div>
+
+  <!-- Hero content -->
+  <div class="relative z-10 max-w-5xl mx-auto w-full px-6 pb-20 md:pb-28">
+    <p class="text-accent font-medium text-sm tracking-[0.2em] uppercase mb-5 reveal">
+      Dachdeckermeister · Groß-Gerau · Seit 1995
+    </p>
+    <h1 class="font-display font-extrabold leading-none mb-6 reveal reveal-d1" style="font-size: clamp(3.5rem, 9vw, 8rem); letter-spacing: -0.01em;">
+      Ihr Dach.<br>
+      <span class="text-accent">Unser</span> Handwerk.
+    </h1>
+    <p class="text-ink/70 text-lg md:text-xl max-w-xl mb-10 leading-relaxed reveal reveal-d2">
+      Wir steigen jedem gerne auf's Dach — als Meisterbetrieb mit über 30 Jahren Erfahrung in Groß-Gerau und Umgebung.
+    </p>
+    <div class="flex flex-wrap gap-4 reveal reveal-d3">
+      <a href="#kontakt" class="btn-orange px-7 py-4 text-base">Kostenlosen Dachcheck anfragen</a>
+      <a href="#leistungen" class="btn-ghost px-7 py-4 text-base">Unsere Leistungen</a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+    <div class="scroll-dot"></div>
+    <div class="w-px h-8 bg-accent/30"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MARQUEE
+════════════════════════════════════════════ -->
+<div class="py-5 overflow-hidden border-y border-border bg-surface">
+  <div class="marquee-track select-none">
+    <div class="flex items-center gap-12 pr-12 text-muted font-medium text-sm tracking-widest uppercase">
+      <span>Steildach</span><span class="text-accent/40">◆</span>
+      <span>Flachdach</span><span class="text-accent/40">◆</span>
+      <span>Dachfenster</span><span class="text-accent/40">◆</span>
+      <span>Fassade</span><span class="text-accent/40">◆</span>
+      <span>Dachcheck</span><span class="text-accent/40">◆</span>
+      <span>Reparaturen</span><span class="text-accent/40">◆</span>
+      <span>Gerüstbau</span><span class="text-accent/40">◆</span>
+      <span>Meisterbetrieb</span><span class="text-accent/40">◆</span>
+      <span>30 Jahre Erfahrung</span><span class="text-accent/40">◆</span>
+      <span>Groß-Gerau</span><span class="text-accent/40">◆</span>
+    </div>
+    <div class="flex items-center gap-12 pr-12 text-muted font-medium text-sm tracking-widest uppercase" aria-hidden="true">
+      <span>Steildach</span><span class="text-accent/40">◆</span>
+      <span>Flachdach</span><span class="text-accent/40">◆</span>
+      <span>Dachfenster</span><span class="text-accent/40">◆</span>
+      <span>Fassade</span><span class="text-accent/40">◆</span>
+      <span>Dachcheck</span><span class="text-accent/40">◆</span>
+      <span>Reparaturen</span><span class="text-accent/40">◆</span>
+      <span>Gerüstbau</span><span class="text-accent/40">◆</span>
+      <span>Meisterbetrieb</span><span class="text-accent/40">◆</span>
+      <span>30 Jahre Erfahrung</span><span class="text-accent/40">◆</span>
+      <span>Groß-Gerau</span><span class="text-accent/40">◆</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TRUST BAR
+════════════════════════════════════════════ -->
+<section class="py-14 border-b border-border">
+  <div class="max-w-5xl mx-auto px-6">
+    <p class="text-center text-muted text-xs tracking-[0.2em] uppercase mb-10 reveal">Zertifizierter Partner von</p>
+    <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16 reveal reveal-d1">
+      <!-- Text-based partner logos (until real PNGs are provided) -->
+      <span class="trust-logo font-display font-bold text-2xl tracking-wider text-ink">BRAAS</span>
+      <span class="trust-logo font-display font-bold text-2xl tracking-wider text-ink">VELUX</span>
+      <span class="trust-logo font-display font-bold text-2xl tracking-wider text-ink">ROTO</span>
+      <span class="trust-logo font-display font-bold text-2xl tracking-wider text-ink">CREATON</span>
+      <span class="trust-logo font-display font-bold text-2xl tracking-wider text-ink">WIENERBERGER</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     LEISTUNGEN
+════════════════════════════════════════════ -->
+<section id="leistungen" class="py-24 md:py-32">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="mb-16 reveal">
+      <p class="text-accent font-medium text-sm tracking-[0.2em] uppercase mb-3">Was wir tun</p>
+      <h2 class="font-display font-bold text-5xl md:text-7xl leading-none mb-4">Unsere<br>Leistungen</h2>
+      <div class="accent-line"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Steildach -->
+      <div class="service-card p-7 reveal reveal-d1">
+        <div class="service-icon mb-5">
+          <svg width="22" height="22" fill="none" stroke="#E85D04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M3 9L12 2L21 9V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9z"/>
+            <polyline points="9,21 9,12 15,12 15,21"/>
+          </svg>
+        </div>
+        <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Steildach</h3>
+        <p class="text-muted text-sm leading-relaxed mb-5">Neueindeckung und Sanierung von Satteldächern, Walmdächern und Mansarddächern — mit hochwertigen Dachziegeln und Dachsteinen.</p>
+        <span class="text-accent text-sm font-medium inline-flex items-center gap-1">Mehr erfahren
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </span>
+      </div>
+
+      <!-- Flachdach -->
+      <div class="service-card p-7 reveal reveal-d2">
+        <div class="service-icon mb-5">
+          <svg width="22" height="22" fill="none" stroke="#E85D04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <rect x="2" y="7" width="20" height="3" rx="1"/>
+            <rect x="4" y="10" width="16" height="8" rx="1"/>
+          </svg>
+        </div>
+        <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Flachdach</h3>
+        <p class="text-muted text-sm leading-relaxed mb-5">Moderne Flachdach-Sanierung mit zuverlässiger Abdichtung — Bitumen, Kunststoffbahnen oder Flüssigabdichtung für dauerhaften Schutz.</p>
+        <span class="text-accent text-sm font-medium inline-flex items-center gap-1">Mehr erfahren
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </span>
+      </div>
+
+      <!-- Dachfenster -->
+      <div class="service-card p-7 reveal reveal-d3">
+        <div class="service-icon mb-5">
+          <svg width="22" height="22" fill="none" stroke="#E85D04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="12" y1="3" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Dachfenster</h3>
+        <p class="text-muted text-sm leading-relaxed mb-5">Einbau und Austausch von Velux- und Roto-Dachfenstern — für mehr Licht und frische Luft in Ihren Wohnräumen.</p>
+        <span class="text-accent text-sm font-medium inline-flex items-center gap-1">Mehr erfahren
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </span>
+      </div>
+
+      <!-- Fassade -->
+      <div class="service-card p-7 reveal reveal-d4">
+        <div class="service-icon mb-5">
+          <svg width="22" height="22" fill="none" stroke="#E85D04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <rect x="2" y="3" width="20" height="18" rx="2"/>
+            <line x1="2" y1="9" x2="22" y2="9"/>
+            <line x1="2" y1="15" x2="22" y2="15"/>
+            <line x1="8" y1="3" x2="8" y2="21"/>
+            <line x1="16" y1="3" x2="16" y2="21"/>
+          </svg>
+        </div>
+        <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Fassade</h3>
+        <p class="text-muted text-sm leading-relaxed mb-5">Außenwandverkleidungen aus Schiefer, Metall und Ton-Schindeln — schützen und verschönern die Fassade Ihres Gebäudes dauerhaft.</p>
+        <span class="text-accent text-sm font-medium inline-flex items-center gap-1">Mehr erfahren
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </span>
+      </div>
+
+      <!-- Dachcheck -->
+      <div class="service-card p-7 reveal reveal-d5">
+        <div class="service-icon mb-5">
+          <svg width="22" height="22" fill="none" stroke="#E85D04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M9 11l3 3L22 4"/>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+        </div>
+        <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Dachcheck</h3>
+        <p class="text-muted text-sm leading-relaxed mb-5">Professionelle Dachinspektion mit detailliertem Prüfprotokoll — erkennen Sie Schäden frühzeitig, bevor sie teuer werden.</p>
+        <span class="text-accent text-sm font-medium inline-flex items-center gap-1">Mehr erfahren
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </span>
+      </div>
+
+      <!-- Reparaturen -->
+      <div class="service-card p-7 reveal reveal-d6">
+        <div class="service-icon mb-5">
+          <svg width="22" height="22" fill="none" stroke="#E85D04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+          </svg>
+        </div>
+        <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Reparaturen</h3>
+        <p class="text-muted text-sm leading-relaxed mb-5">Schnelle Notfall-Reparaturen und Gerüstbau für alle Dachreparaturen — zuverlässig, sauber und termingerecht ausgeführt.</p>
+        <span class="text-accent text-sm font-medium inline-flex items-center gap-1">Mehr erfahren
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     ÜBER UNS
+════════════════════════════════════════════ -->
+<section id="ueber-uns" class="py-24 md:py-32 bg-surface border-y border-border">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <!-- Text -->
+      <div>
+        <p class="text-accent font-medium text-sm tracking-[0.2em] uppercase mb-3 reveal">Über uns</p>
+        <h2 class="font-display font-bold leading-none mb-6 reveal reveal-d1" style="font-size: clamp(3rem, 7vw, 5.5rem);">30 Jahre.<br>Immer oben.</h2>
+        <div class="accent-line mb-8 reveal reveal-d1"></div>
+        <p class="text-ink/70 leading-relaxed mb-5 reveal reveal-d2">
+          Seit 1995 steht der Name Oehme in Groß-Gerau und der Region für zuverlässige Dachdeckerarbeit auf höchstem Niveau. Als eingetragener Meisterbetrieb verbinden wir traditionelles Handwerk mit modernen Techniken.
+        </p>
+        <p class="text-ink/70 leading-relaxed mb-8 reveal reveal-d2">
+          Inhaber Frank Oehme führt jeden Auftrag persönlich — von der ersten Beratung bis zur abschließenden Abnahme. Kein Auftrag ist zu klein, kein Dach zu anspruchsvoll.
+        </p>
+        <a href="#kontakt" class="btn-orange px-7 py-4 text-base reveal reveal-d3">Jetzt Kontakt aufnehmen</a>
+      </div>
+      <!-- Stats -->
+      <div class="grid grid-cols-2 gap-4">
+        <div class="stat-card p-6 reveal reveal-d1">
+          <div class="font-display font-bold text-5xl text-accent leading-none mb-2">30+</div>
+          <div class="text-ink/70 text-sm">Jahre Erfahrung</div>
+        </div>
+        <div class="stat-card p-6 reveal reveal-d2">
+          <div class="font-display font-bold text-5xl text-accent leading-none mb-2">∞</div>
+          <div class="text-ink/70 text-sm">Meisterbetrieb</div>
+        </div>
+        <div class="stat-card p-6 reveal reveal-d3">
+          <div class="font-display font-bold text-4xl text-accent leading-none mb-2">Groß-<br>Gerau</div>
+          <div class="text-ink/70 text-sm">& Region</div>
+        </div>
+        <div class="stat-card p-6 reveal reveal-d4">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="w-3 h-3 rounded-full bg-accent animate-pulse"></div>
+            <div class="font-display font-bold text-3xl text-accent leading-none">24h</div>
+          </div>
+          <div class="text-ink/70 text-sm">Notfall-Service</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PROZESS
+════════════════════════════════════════════ -->
+<section class="py-24 md:py-32">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="mb-16 reveal">
+      <p class="text-accent font-medium text-sm tracking-[0.2em] uppercase mb-3">So arbeiten wir</p>
+      <h2 class="font-display font-bold text-5xl md:text-7xl leading-none mb-4">Einfach.<br>Klar.</h2>
+      <div class="accent-line"></div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+      <div class="process-step pl-6 reveal reveal-d1">
+        <div class="step-number">01</div>
+        <div class="relative pt-8">
+          <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Kostenloser Dachcheck</h3>
+          <p class="text-muted text-sm leading-relaxed">Wir kommen zu Ihnen, schauen uns das Dach an und geben Ihnen eine ehrliche Einschätzung — ohne versteckte Kosten.</p>
+        </div>
+      </div>
+      <div class="process-step pl-6 reveal reveal-d2">
+        <div class="step-number">02</div>
+        <div class="relative pt-8">
+          <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Individuelles Angebot</h3>
+          <p class="text-muted text-sm leading-relaxed">Sie erhalten ein transparentes, detailliertes Angebot — kein Kleingedrucktes, keine bösen Überraschungen.</p>
+        </div>
+      </div>
+      <div class="process-step pl-6 reveal reveal-d3">
+        <div class="step-number">03</div>
+        <div class="relative pt-8">
+          <h3 class="font-display font-bold text-2xl mb-3 tracking-wide">Saubere Ausführung</h3>
+          <p class="text-muted text-sm leading-relaxed">Wir arbeiten pünktlich, sauber und zuverlässig. Nach Abschluss nehmen wir gemeinsam mit Ihnen ab.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PROJEKTE
+════════════════════════════════════════════ -->
+<section id="projekte" class="py-24 md:py-32 bg-surface border-y border-border">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="mb-16 reveal">
+      <p class="text-accent font-medium text-sm tracking-[0.2em] uppercase mb-3">Referenzen</p>
+      <h2 class="font-display font-bold text-5xl md:text-7xl leading-none mb-4">Unsere<br>Projekte</h2>
+      <div class="accent-line"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="project-card h-64 cursor-pointer reveal reveal-d1">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=75" alt="Steildach Projekt">
+        <div class="project-overlay flex items-end p-5">
+          <div>
+            <span class="text-xs font-medium text-accent/80 tracking-wider uppercase">Steildach</span>
+            <p class="text-ink font-display font-bold text-xl mt-1">Einfamilienhaus<br>Groß-Gerau</p>
+          </div>
+        </div>
+      </div>
+      <div class="project-card h-64 cursor-pointer reveal reveal-d2">
+        <img src="https://images.unsplash.com/photo-1590073844006-33379778ae09?w=600&q=75" alt="Flachdach Projekt">
+        <div class="project-overlay flex items-end p-5">
+          <div>
+            <span class="text-xs font-medium text-accent/80 tracking-wider uppercase">Flachdach</span>
+            <p class="text-ink font-display font-bold text-xl mt-1">Gewerbebau<br>Rüsselsheim</p>
+          </div>
+        </div>
+      </div>
+      <div class="project-card h-64 cursor-pointer reveal reveal-d3">
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=75" alt="Fassade Projekt">
+        <div class="project-overlay flex items-end p-5">
+          <div>
+            <span class="text-xs font-medium text-accent/80 tracking-wider uppercase">Fassade</span>
+            <p class="text-ink font-display font-bold text-xl mt-1">Mehrfamilienhaus<br>Darmstadt</p>
+          </div>
+        </div>
+      </div>
+      <div class="project-card h-64 cursor-pointer reveal reveal-d4 md:col-span-2">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=75" alt="Steildach Grosses Projekt" style="object-position: center 60%">
+        <div class="project-overlay flex items-end p-5">
+          <div>
+            <span class="text-xs font-medium text-accent/80 tracking-wider uppercase">Steildach</span>
+            <p class="text-ink font-display font-bold text-xl mt-1">Sanierung Altbau<br>Groß-Gerau Kernstadt</p>
+          </div>
+        </div>
+      </div>
+      <div class="project-card h-64 cursor-pointer reveal reveal-d5">
+        <img src="https://images.unsplash.com/photo-1523413555605-d7c79dd3b43d?w=600&q=75" alt="Dachfenster Projekt">
+        <div class="project-overlay flex items-end p-5">
+          <div>
+            <span class="text-xs font-medium text-accent/80 tracking-wider uppercase">Dachfenster</span>
+            <p class="text-ink font-display font-bold text-xl mt-1">Velux Einbau<br>Büttelborn</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     KONTAKT
+════════════════════════════════════════════ -->
+<section id="kontakt" class="py-24 md:py-32">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="mb-16 reveal">
+      <p class="text-accent font-medium text-sm tracking-[0.2em] uppercase mb-3">Kontakt</p>
+      <h2 class="font-display font-bold text-5xl md:text-7xl leading-none mb-4">Sprechen<br>wir.</h2>
+      <div class="accent-line"></div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <!-- Form -->
+      <div class="reveal reveal-d1">
+        <form action="https://api.web3forms.com/submit" method="POST" class="space-y-8">
+          <input type="hidden" name="access_key" value="HIER_WEB3FORMS_KEY_EINTRAGEN">
+          <input type="hidden" name="subject" value="Neue Anfrage – Dachdeckermeister Oehme">
+          <input type="hidden" name="redirect" value="">
+
+          <div>
+            <label class="text-muted text-xs tracking-widest uppercase block mb-2">Name</label>
+            <input type="text" name="name" placeholder="Ihr vollständiger Name" class="field" required>
+          </div>
+          <div>
+            <label class="text-muted text-xs tracking-widest uppercase block mb-2">E-Mail</label>
+            <input type="email" name="email" placeholder="ihre@email.de" class="field" required>
+          </div>
+          <div>
+            <label class="text-muted text-xs tracking-widest uppercase block mb-2">Telefon</label>
+            <input type="tel" name="phone" placeholder="+49 ..." class="field">
+          </div>
+          <div>
+            <label class="text-muted text-xs tracking-widest uppercase block mb-2">Leistung</label>
+            <select name="service" class="field" style="cursor: pointer;">
+              <option value="" disabled selected style="background:#1A1D27;">Bitte wählen</option>
+              <option value="dachcheck" style="background:#1A1D27;">Kostenloser Dachcheck</option>
+              <option value="steildach" style="background:#1A1D27;">Steildach</option>
+              <option value="flachdach" style="background:#1A1D27;">Flachdach</option>
+              <option value="dachfenster" style="background:#1A1D27;">Dachfenster</option>
+              <option value="fassade" style="background:#1A1D27;">Fassade</option>
+              <option value="reparatur" style="background:#1A1D27;">Reparatur / Notfall</option>
+              <option value="sonstiges" style="background:#1A1D27;">Sonstiges</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-muted text-xs tracking-widest uppercase block mb-2">Nachricht</label>
+            <textarea name="message" placeholder="Beschreiben Sie kurz Ihr Anliegen..." class="field" required></textarea>
+          </div>
+          <button type="submit" class="btn-orange px-8 py-4 text-base w-full text-center">Anfrage absenden</button>
+        </form>
+      </div>
+
+      <!-- Contact info -->
+      <div class="space-y-8 reveal reveal-d2">
+        <div class="notfall-badge mb-8">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6.07 6.07l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Notfall? Sofort anrufen: +49 6152 39905
+        </div>
+
+        <div class="space-y-6">
+          <div class="flex gap-4">
+            <div class="w-10 h-10 rounded-xl bg-surface border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg width="16" height="16" fill="none" stroke="#E85D04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6.07 6.07l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <p class="text-muted text-xs tracking-widest uppercase mb-1">Telefon</p>
+              <a href="tel:+496152399050" class="text-ink font-medium hover:text-accent transition-colors">+49 6152 39905</a>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="w-10 h-10 rounded-xl bg-surface border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg width="16" height="16" fill="none" stroke="#E85D04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <p class="text-muted text-xs tracking-widest uppercase mb-1">E-Mail</p>
+              <a href="mailto:ddmoehme.frank@gmail.com" class="text-ink font-medium hover:text-accent transition-colors">ddmoehme.frank@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="w-10 h-10 rounded-xl bg-surface border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg width="16" height="16" fill="none" stroke="#E85D04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <p class="text-muted text-xs tracking-widest uppercase mb-1">Adresse</p>
+              <p class="text-ink font-medium">Schützenstraße 13<br>D-64521 Groß-Gerau</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="w-10 h-10 rounded-xl bg-surface border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg width="16" height="16" fill="none" stroke="#E85D04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+            </div>
+            <div>
+              <p class="text-muted text-xs tracking-widest uppercase mb-1">Öffnungszeiten</p>
+              <p class="text-ink font-medium">Mo–Fr: 7:00 – 17:00 Uhr<br><span class="text-accent text-sm">Notfall: 24/7 erreichbar</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map placeholder -->
+        <div class="rounded-2xl overflow-hidden border border-border h-52 bg-surface flex items-center justify-center">
+          <a href="https://maps.google.com/?q=Schützenstraße+13,+64521+Groß-Gerau" target="_blank" rel="noopener" class="flex flex-col items-center gap-2 text-muted hover:text-accent transition-colors">
+            <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="text-sm font-medium">In Google Maps öffnen</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer class="border-t border-border py-12">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <svg width="20" height="18" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 18L11 3L21 18" stroke="#E85D04" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="6" y="12" width="10" height="7" rx="1" fill="#E85D04"/>
+          <rect x="9" y="14" width="4" height="5" rx="0.5" fill="#0F1117"/>
+        </svg>
+        <span class="font-display font-bold text-lg tracking-widest text-ink">OEHME</span>
+        <span class="text-muted text-sm hidden sm:inline">— Wir steigen jedem gerne auf's Dach</span>
+      </div>
+      <div class="flex items-center gap-6 text-sm text-muted">
+        <a href="impressum.html" class="hover:text-ink transition-colors">Impressum</a>
+        <a href="datenschutz.html" class="hover:text-ink transition-colors">Datenschutz</a>
+        <span>© 2025 Frank Oehme GmbH</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  // Navbar scroll effect
+  (function() {
+    var pill = document.getElementById('nav-pill');
+    function update() {
+      if (window.scrollY > 60) {
+        pill.style.padding = '.65rem 1rem .65rem 1.5rem';
+        pill.style.background = 'rgba(15,17,23,0.2)';
+      } else {
+        pill.style.padding = '1.1rem 1.25rem 1.1rem 1.75rem';
+        pill.style.background = 'rgba(15,17,23,0.06)';
+      }
+    }
+    window.addEventListener('scroll', update, { passive: true });
+  })();
+
+  // Mobile menu
+  (function() {
+    var menu   = document.getElementById('mobile-menu');
+    var openBtn  = document.getElementById('open-menu');
+    var closeBtn = document.getElementById('close-menu');
+    var links  = document.querySelectorAll('.mobile-link');
+
+    function openMenu() {
+      menu.classList.add('open');
+      menu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      menu.classList.remove('open');
+      menu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    openBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    links.forEach(function(l) { l.addEventListener('click', closeMenu); });
+  })();
+
+  // Reveal animations
+  (function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
