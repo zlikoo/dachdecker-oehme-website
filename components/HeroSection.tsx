@@ -32,7 +32,7 @@ export default function HeroSection() {
         muted
         loop
         playsInline
-        poster="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80"
+        poster="https://www.dachdeckermeister-oehme.de/img/home/001.jpg"
       >
         <source
           src="https://videos.pexels.com/video-files/3886214/3886214-hd_1920_1080_25fps.mp4"

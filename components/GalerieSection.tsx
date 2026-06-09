@@ -3,41 +3,43 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+const BASE = "https://www.dachdeckermeister-oehme.de";
+
 const projekte = [
   {
-    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80",
-    title: "Satteldach Neubau",
+    src: `${BASE}/img/refs/01.jpg`,
+    title: "Satteldach Referenz",
     ort: "Groß-Gerau",
     large: true,
   },
   {
-    src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
-    title: "Gewerbedach",
+    src: `${BASE}/img/refs/03.jpg`,
+    title: "Dacheindeckung",
+    ort: "Groß-Gerau",
+    large: false,
+  },
+  {
+    src: `${BASE}/img/refs/05.jpg`,
+    title: "Dachsanierung",
     ort: "Darmstadt",
     large: false,
   },
   {
-    src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80",
-    title: "Fassade & Dach",
-    ort: "Rüsselsheim",
-    large: false,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1448630360428-65456885c650?w=800&q=80",
+    src: `${BASE}/img/refs/07.jpg`,
     title: "Klempnerarbeiten",
     ort: "Nauheim",
     large: false,
   },
   {
-    src: "https://images.unsplash.com/photo-1510218830377-2e994ea9087b?w=800&q=80",
-    title: "Dachfenster",
-    ort: "Wallerstädten",
+    src: `${BASE}/img/refs/10.jpg`,
+    title: "Neubau Dach",
+    ort: "Rüsselsheim",
     large: false,
   },
   {
-    src: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
-    title: "Wohnhaus Sanierung",
-    ort: "Geinsheim",
+    src: `${BASE}/img/refs/13.jpg`,
+    title: "Wohnhaus",
+    ort: "Wallerstädten",
     large: false,
   },
 ];
