@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import Image from "next/image";
 
 const stats = [
   { value: 30, suffix: "+", label: "Jahre Erfahrung" },
@@ -118,6 +119,30 @@ export default function StatsSection() {
           für geprüfte Qualität und regionales Handwerk auf höchstem Niveau.
         </motion.p>
       </div>
+
+      {/* Team Photo Strip */}
+      <motion.div
+        className="relative mt-16 mx-auto max-w-4xl px-4"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, delay: 0.3 }}
+      >
+        <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden">
+          <Image
+            src="/Oehme-Team-2020.png"
+            alt="Das Team von Dachdeckermeister Frank Oehme GmbH"
+            fill
+            className="object-cover object-top"
+            sizes="(max-width: 768px) 100vw, 896px"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/70 to-transparent" />
+          <div className="absolute bottom-0 left-0 p-6">
+            <p className="font-display text-2xl text-white tracking-wide">DAS TEAM</p>
+            <p className="font-sans text-white/60 text-sm">10 Fachleute. Ein Ziel: Ihr perfektes Dach.</p>
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }

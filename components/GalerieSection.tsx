@@ -7,8 +7,8 @@ const BASE = "https://www.dachdeckermeister-oehme.de";
 
 const projekte = [
   {
-    src: `${BASE}/img/refs/01.jpg`,
-    title: "Satteldach Referenz",
+    src: "/Oehme.jpg",
+    title: "Meisterbetrieb Oehme",
     ort: "Groß-Gerau",
     large: true,
   },

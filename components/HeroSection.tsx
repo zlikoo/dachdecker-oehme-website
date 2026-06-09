@@ -32,12 +32,9 @@ export default function HeroSection() {
         muted
         loop
         playsInline
-        poster="https://www.dachdeckermeister-oehme.de/img/home/001.jpg"
+        poster="/Oehme.jpg"
       >
-        <source
-          src="https://videos.pexels.com/video-files/3886214/3886214-hd_1920_1080_25fps.mp4"
-          type="video/mp4"
-        />
+        <source src="/Hero.mp4" type="video/mp4" />
       </video>
 
       {/* Layered Overlays for depth */}
